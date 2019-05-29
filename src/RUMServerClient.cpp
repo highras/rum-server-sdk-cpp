@@ -18,9 +18,10 @@ RUMServerClient::RUMServerClient(int32_t pid, const string& secret, const string
 {
     MidGenerator::init(slack_real_msec());
     _client = TCPClient::createClient(endpoint, reconnect);
-    if (_client) {
+    if (_client)
         _client->setQuestTimeout(timeout);
-    }
+    else
+        throw RUMException("create rum client error");
 }
 
 RUMServerClient::~RUMServerClient()
@@ -46,6 +47,11 @@ void RUMServerClient::setQuestTimeout(int seconds)
 void RUMServerClient::setAutoReconnect(bool autoReconnect)
 {
     _client->setAutoReconnect(autoReconnect);
+}
+
+void RUMServerClient::setServerMonitor(shared_ptr<RUMServerMonitor> serverMonitor)
+{
+    _client->setQuestProcessor(serverMonitor);
 }
 
 bool RUMServerClient::enableEncryptorByDerData(const string &derData, bool packageMode, bool reinforce)

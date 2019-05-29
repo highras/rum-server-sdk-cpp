@@ -3,12 +3,23 @@
 #include "fpnn.h"
 #include "RumEvent.h"
 #include "QuestResult.h"
+#include "RUMServerMonitor.h"
 
 using namespace std;
 using namespace fpnn;
 
 namespace rum 
 {
+
+    class RUMException : exception
+    {
+    public:
+        RUMException(const std::string& msg) { _msg = msg; }
+        ~RUMException() throw() {}
+        const char* what() const throw() { return _msg.c_str(); }
+    private:
+        std::string _msg;
+    };
 
     class RUMServerClient
     {
@@ -20,6 +31,7 @@ namespace rum
         const string& endpoint();
         void setQuestTimeout(int seconds);
         void setAutoReconnect(bool autoReconnect);
+        void setServerMonitor(shared_ptr<RUMServerMonitor> serverMonitor);
 
         bool enableEncryptorByDerData(const string &derData, bool packageMode = true, bool reinforce = false);
         bool enableEncryptorByPemData(const string &PemData, bool packageMode = true, bool reinforce = false);
