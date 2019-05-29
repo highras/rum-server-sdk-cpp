@@ -110,13 +110,13 @@
 
 #### 构造事件两种方式
 ```
-// 构造是指定attrs 字段长度，逐条添加
+// 构造时指定attrs字段长度，逐条添加
 RumEventPtr event(new RumEvent("eventName", 3));
 event->param("key1", "value1");
 event->param("key2", "value2");
 event->param("key3", "value3");
 	
-// 通过json格式添加
+// 通过json描述的attrs方式添加
 RumEventPtr event(new RumEvent("eventName", "{\"key\":\"value\"}"));
 ```
 
