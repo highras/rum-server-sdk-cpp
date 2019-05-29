@@ -83,6 +83,9 @@
 #### 设置是否自动重连
 * `void setAutoReconnect(bool autoReconnect)` 
 
+#### 设置服务端监听（可监听连接建立/关闭事件）
+* `void setServerMonitor(shared_ptr<RUMServerMonitor> serverMonitor)` 
+
 #### 配置链接加密 请参考 [FPNN Client Advanced Tutorial](https://github.com/highras/fpnn/blob/master/doc/zh-cn/fpnn-client-advanced-tutorial.md#-%E5%8A%A0%E5%AF%86%E9%93%BE%E6%8E%A5)
 * `bool enableEncryptorByDerData(const string &derData, bool packageMode = true, bool reinforce = false)`
 * `bool enableEncryptorByPemData(const string &PemData, bool packageMode = true, bool reinforce = false)`
